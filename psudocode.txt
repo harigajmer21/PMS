@@ -1,0 +1,90 @@
+password_complexity ##Json file / csv
+{
+    isNumber: true,
+    isUpperCase : true,
+    islowerCase: true
+}
+
+#password module
+    function check_complexity_pwd(password)
+        check the given password meets the password_complexity 
+            if (password_complexity):
+                true
+            else
+                false
+
+    function hibp(password)
+        if password is NotExist
+            return true
+        else
+            return false
+
+    function encrypt(password)
+        #do the encrypt
+        #save the password in the data base
+
+
+#Legacy app module
+    function create_legacy_application()
+        #Admin can create passwords
+        {
+            "app_nam" : "Marketing System",
+			"Descritiption" : "Sample Descritiption",
+			"Url" : "http://wwww.google.com"
+        }    
+        #This should be saved in database
+
+
+#User module
+    function create_user()
+    #In here when someine resgister in normal user type not Admin
+    {
+        "username" : "jack",
+		"email" : "jack@gamil.com",
+		"password" : "hfjjfkjfk" #This password should be master password and you don`t need to encrypt it. Just hash it
+    }
+
+#Password complexity update module
+#This is only for ADMIN
+#We can use one time Insert query to insert ADMIN person to database when system run.
+	
+	function update_pwd_complexity()
+		#Load the exisiting complexity file(json formate)
+		#Do the update procedure
+		#Need to figure out how to edit json file using python
+
+#Extra feature
+
+1: When system admin change the complexity all others users will get a notification that System admin change the password.
+Please update your passwords.
+
+
+
+##Login and Register  module
+Login and Register  module classs
+
+		function login()
+			{
+				"email" : "user email goes here",
+				"password" : "password"
+			}
+		//Successfully login should be generate new JWT token. It is not mandatory. Byt our professor expection some rest api authentication
+		mechanisam. So we have to figure it out. HttpBasicAuth also possible. I guess...not confirm.
+		
+		function register()
+			{
+				"email" : "user email goes here",
+				"password" : "password"
+				"username" : "username"
+				#By default this users register as normal user access. Not admin
+				
+			}
+
+#Database classes 
+1: password table for save users legacy app password
+2. Legacy app table for save all legacy apps which create by admin
+3. System users list table	
+	#This table by default 1st record is admin user
+	#That`s how i handle the problem. Maybe you can use different mechansim.
+
+
