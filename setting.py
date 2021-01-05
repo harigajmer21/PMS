@@ -11,3 +11,5 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Initializing our database
 db = SQLAlchemy(app)
 
+
+
