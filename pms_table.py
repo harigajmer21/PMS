@@ -50,6 +50,14 @@ class UserApp(db.Model):
 
 db.create_all()
 
+
+password_complexity ##Json file / csv
+{
+    isNumber: true,
+    isUpperCase : true,
+    islowerCase: true
+}
+
 #password module
 function check_complexity_pwd(password)
         check the given password meets the password_complexity 
