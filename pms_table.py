@@ -49,3 +49,11 @@ class UserApp(db.Model):
         # this method we are defining will convert our output to json
 
 db.create_all()
+
+#password module
+    function check_complexity_pwd(password)
+        check the given password meets the password_complexity 
+            if (password_complexity):
+                true
+            else
+                false
