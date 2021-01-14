@@ -51,7 +51,7 @@ class UserApp(db.Model):
 db.create_all()
 
 #password module
-    function check_complexity_pwd(password)
+function check_complexity_pwd(password)
         check the given password meets the password_complexity 
             if (password_complexity):
                 true
