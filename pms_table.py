@@ -59,9 +59,3 @@ password_complexity ##Json file / csv
 }
 
 
-password_complexity ##Json file / csv
-{
-    isNumber: true,
-    isUpperCase : true,
-    islowerCase: true
-    }
