@@ -52,6 +52,7 @@ db.create_all()
 
 
 #password_complexity ##Json file / csv
+
 from password_strength import PasswordPolicy
 
 policy = PasswordPolicy.from_names(
