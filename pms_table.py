@@ -51,11 +51,14 @@ class UserApp(db.Model):
 db.create_all()
 
 
-password_complexity ##Json file / csv
-{
-    isNumber: true,
-    isUpperCase : true,
-    islowerCase: true
-}
+#password_complexity ##Json file / csv
+from password_strength import PasswordPolicy
 
+policy = PasswordPolicy.from_names(
+    length=8,  # min length: 8
+    uppercase=2,  # need min. 2 uppercase letters
+    numbers=2,  # need min. 2 digits
+    special=2,  # need min. 2 special characters
+    nonletters=2,  # need min. 2 non-letter characters (digits, specials, anything)
+)
 
