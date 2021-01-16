@@ -58,10 +58,9 @@ password_complexity ##Json file / csv
     islowerCase: true
 }
 
-#password module
-function check_complexity_pwd(password)
-        check the given password meets the password_complexity 
-            if (password_complexity):
-                true
-            else
-                false
+
+password_complexity ##Json file / csv
+{
+    isNumber: true,
+    isUpperCase : true,
+    islowerCase: true
