@@ -1,6 +1,8 @@
 from setting import *
 from pms_table import Legacyapp, UserApp
 
+from password.password import Password
+
 # route to add new movie
 @app.route('/addlegacyapp', methods=['POST'])
 def add_legacy_app():
@@ -33,6 +35,24 @@ def add_user_app():
 def get_user_app_list():
     '''Function to get all the get_legacy_app in the database'''
     return jsonify({'Get all user List': UserApp.get_all_users()})
+
+@app.route('/add_new_password', methods=['POST'])
+def create_password():
+    request_data = request.get_json()
+    password = request_data['password']
+    response_complexity = Password.password_complexity(password)
+    response_hibp  = Password.hibp(password)
+    response_encrypt = Password.encrypt(password)
+
+    if response_complexity is False:
+        print("Not pass")
+        return False
+    elif response_hibp is False:
+        print("not pass")
+        return False
+    else:
+        ##Save the database
+        
 
 
 if __name__ == "__main__":
