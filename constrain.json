@@ -1,0 +1,19 @@
+{
+    "username": {        
+        "alpha": true,
+        "cap": 2,
+        "number": true,
+        "min_length": 5,
+        "max_length": 20,
+        "non_alpha": [".", "_"]
+    },        
+    "password": {
+        "alpha": true,             
+        "cap": 2,
+        "number": true,     
+        "min_length": 5,
+        "max_length": 20,
+        "non_alpha": [".", "_", "@"],
+        "pwd_update_after": "3 days"
+    }    
+}
