@@ -20,7 +20,7 @@ def index():
 def login():
     credientials = request.get_json()
     username = credientials['username']
-    password = credientials['password']            
+    password = credientials['password']
     
     try:
         user = User.authenticate(username, password)
@@ -32,7 +32,7 @@ def login():
             }
             return make_response(jsonify(responseObject)), 200        
         auth_token = user.encode_auth_token(user.id, user.is_admin)
-        print(password)
+        
         if auth_token:
             # check if any credition config has been changes respect to update_on
             usernameValid = UsernameValidation(username)
@@ -41,28 +41,28 @@ def login():
             usernameValid.check_all()            
             
              
-            if not dog_watch() or (user.updated_on > usernameValid.last_update()):
+            if not dog_watch() and (user.updated_on > usernameValid.last_update()):
                 notice = {}                                   
                 if any(usernameValid.error_msg.values()):
                     notice['username'] = usernameValid.error_msg
                 if any(passwordValid.error_msg.values()):
                     notice['password'] = passwordValid.error_msg
-                
-                responseObject = {       
-                    'status': 'success',                 
-                    'message': 'Successfully logged in. but',
-                    'auth_token': auth_token.decode(),
-                    'config_file_modified': dog_watch(),
-                    'update_info': notice
-                }
-                
-                return make_response(jsonify(responseObject)), 200
+                if len(notice['username']) != 0 or len(notice['password']) != 0:
+                    responseObject = {       
+                        'status': 'success',                 
+                        'message': 'Successfully logged in. but',
+                        'auth_token': auth_token,
+                        'config_file_modified': dog_watch(),
+                        'update_info': notice
+                    }
+                    
+                    return make_response(jsonify(responseObject)), 200
 
-                
+            print(auth_token)
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully logged in.',
-                'auth_token': auth_token.decode()
+                'auth_token': auth_token
             }        
             return make_response(jsonify(responseObject)), 200
     except Exception as e:

@@ -49,10 +49,11 @@ def add_user():
             # generate auth token
             # generate the auth token            
             auth_token = new_user.encode_auth_token(new_user.id, new_user.is_admin)
+            print(auth_token)
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully registered.',
-                'auth_token': auth_token.decode()
+                'auth_token': auth_token
             }
             return make_response(jsonify(responseObject)), 201
             # return user_schema.jsonify(new_user)
