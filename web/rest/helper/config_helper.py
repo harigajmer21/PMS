@@ -19,8 +19,8 @@ class Constrain:
     def count_caps(self, fieldName, fieldValue):        
         cap_condition = self.constrain[fieldName]['cap']             
         n_cap = len([l.isupper for l in fieldValue if l.isupper()==True])            
-        if n_cap != cap_condition:
-            return f'{fieldName} must have {cap_condition} capital letters'
+        if n_cap < cap_condition:
+            return f'{fieldName} must have at least {cap_condition} capital letters'
         else:
             return None         
     
@@ -30,6 +30,19 @@ class Constrain:
             return f'{fieldName} length must have more than {min_length} characters'
         else:
             return None
+
+
+    def has_number(self, fieldName, fieldValue):
+        n_number = self.constrain[fieldName]['number']
+        if n_number:
+            if any(map(str.isdigit, fieldValue)):
+                return None
+            return f'{fieldName} must contain a number'
+        return None
+
+                # check if fieldvalue contains number or not
+
+
 
 class UsernameValidation(Constrain):
     def __init__(self, username):
@@ -54,8 +67,9 @@ class PasswordValidation(Constrain):
         self.error_msg = {}
         field = 'password'
         
-        self.error_msg['cap_err'] = self.count_caps(field, self.password)
+        self.error_msg['cap_err'] = self.count_caps(field, self.password) 
         self.error_msg['min_len_error'] = self.check_min_length(field, self.password)
+        self.error_msg['has_number'] = self.has_number(field, self.password)
         return self.error_msg
     
 
@@ -94,7 +108,8 @@ class PasswordValidation(Constrain):
 #             self.error_msg['min_len_err'] = err_msg
             
 def dog_watch():
-    hasher = md5()
+    import hashlib 
+    hasher = hashlib.sha256()      
     with open(app.config['CONF_FILE'], 'rb') as f:        
         buf = f.read()
         hasher.update(buf)

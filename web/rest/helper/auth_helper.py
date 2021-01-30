@@ -3,14 +3,15 @@ import jwt
 from web.model.models import BlacklistToken
 from web import app
 from functools import wraps
-
+import os 
 def token_required(id):
     def decorated(func):
         @wraps(func)
         def inner (*args, **kwargs):                        
             try: 
+                
                 auth_token = request.headers.get('Authorization')
-                if auth_token != '' and auth_token != None:
+                if auth_token != os.getenv(' ') and auth_token != None:
                     try:
                         payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'))
                         is_blacklisted_token = BlacklistToken.check_blacklist(auth_token)

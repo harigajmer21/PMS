@@ -39,7 +39,7 @@ def get_all_pms():
     resp = User.decode_auth_token(auth_token)
     if resp['is_admin']:            
         try:                    
-            pms = PMS.query.filter_by(is_active=True).all()
+            pms = PMS.query.filter_by(is_active=True).all()            
             responseObject = {
                 'status': 'success',
                 'data': pmss_schema.dump(pms)
@@ -80,7 +80,6 @@ def get_pms_by_id(id):
         except Exception as e:
             print(e)
             return 'Server error'        
-
 
 @pms.route('/<id>', methods=['PUT'])
 @token_required(id)
